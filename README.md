@@ -64,7 +64,16 @@ In this work, we showed that the preprocessing stage of financial data pipelines
 
 These improvements indicate that large-scale transaction data can be prepared quickly enough to support real-time or near real-time fraud detection systems. By reducing system latency and enabling faster decision-making, GPU-accelerated preprocessing can remove critical bottlenecks in existing pipelines and help fraud systems scale more effectively with growing data volumes. Through this project, we gained practical insight into GPU architecture, memory access patterns, and parallel algorithm design, as well as the challenges of balancing computation and data movement. Overall, our findings highlight that focusing on foundational data operations is a powerful and complementary strategy for improving the performance of end-to-end machine learning systems.   
 
-Future work will focus on integrating the preprocessing pipeline directly into a downstream machine learning model to measure true end-to-end system speedup and better evaluate real-world impact. From an implementation perspective, a key improvement is incorporating CUDA streams to overlap data transfer with kernel execution, thereby reducing idle time and increasing throughput. Another important extension is scaling the pipeline across multiple GPUs through data partitioning and efficient inter-GPU communication. Together, these steps would move the system closer to production-scale deployment while providing a more complete understanding of its performance benefits.
+Future work will focus on integrating the preprocessing pipeline directly into a downstream machine learning model to measure true end-to-end system speedup and better evaluate real-world impact. From an implementation perspective, a key improvement is incorporating CUDA streams to overlap data transfer with kernel execution, thereby reducing idle time and increasing throughput. Another important extension is scaling the pipeline across multiple GPUs through data partitioning and efficient inter-GPU communication. Together, these steps would move the system closer to production-scale deployment while providing a more complete understanding of its performance benefits.   
+
+## References
+Computing Victor. (n.d.). Financial Transactions Dataset: Analytics. Kaggle. https://www.kaggle.com/datasets/computingvictor/transactions-fraud-datasets   
+
+Gadimov, E., Birihanu, E. Real-time suspicious detection framework for financial data streams. Int. j. inf. tecnol. (2025). https://doi.org/10.1007/s41870-025-02529-6   
+
+Real-Time Financial Fraud Detection: An Intelligent Data-Driven Framework Integrating Machine Learning, Stream Processing, and Big Data Analytics for High-Velocity Transaction Monitoring. (2025). The Asian Bulletin of Big Data Management, 5(4), 124-154. https://doi.org/10.62019/f3c0g313   
+
+Venkata Karunakar Uppalapati. (2025). AI in Financial Services: Real-Time Fraud Detection on Cloud-Native GPU Clusters. Journal of Computer Science and Technology Studies, 7(7), 183-190. https://doi.org/10.32996/jcsts.2025.7.7.16   
 
 
 
