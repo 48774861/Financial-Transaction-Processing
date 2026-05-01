@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --job-name=radix_sort
-#SBATCH --output=radix_sort.out
-#SBATCH --error=radix_sort.err
+#SBATCH --job-name=txn_sort_pipeline
+#SBATCH --output=logs/txn_sort_%j.out
+#SBATCH --error=logs/txn_sort_%j.err
 
 #SBATCH --partition=batch
 #SBATCH --gres=gpu:1
@@ -17,11 +17,19 @@ module load cuda
 
 # Compile
 echo "Compiling..."
+mkdir -p logs
 make clean
 make
 echo ""
 
-# Run executable
-echo "Running Parallel Radix Sort"
+# Run GPU pipeline
+echo "Running GPU Transaction Sort Pipeline"
 echo " "
-./batch_sort
+./transaction_sort_pipeline transactions_data.csv sorted_transactions_gpu.csv
+
+echo ""
+
+# Run CPU pipeline
+echo "Running CPU Transaction Sort Pipeline"
+echo " "
+./transaction_sort_pipeline_cpu transactions_data.csv sorted_transactions_cpu.csv

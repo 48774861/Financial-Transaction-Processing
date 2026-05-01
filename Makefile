@@ -1,25 +1,46 @@
-# Compiler
-NVCC = nvcc
+# =============================================================================
+# Compilers & flags
+# =============================================================================
 
-# Target executable
-TARGET = batch_sort
+NVCC       = nvcc
+CXX        = g++
 
-# Source file
-SRC = batch_radix_sort_transactions.cu
-
-# Compiler flags
 NVCC_FLAGS = -O3 -std=c++17
+CXX_FLAGS  = -O3 -std=c++17
 
-# Default rule
-all: $(TARGET)
+# =============================================================================
+# Targets
+# =============================================================================
 
-$(TARGET): $(SRC)
-	$(NVCC) $(NVCC_FLAGS) $(SRC) -o $(TARGET)
+GPU_TARGET = transaction_sort_pipeline
+CPU_TARGET = transaction_sort_pipeline_cpu
 
-# Run program
-run: $(TARGET)
-	./$(TARGET) transactions_data.csv sorted_transactions
+GPU_SRC    = transaction_sort_pipeline.cu
+CPU_SRC    = transaction_sort_pipeline_cpu.cpp
 
-# Clean build files
+# =============================================================================
+# Rules
+# =============================================================================
+
+.PHONY: all clean run run_gpu run_cpu
+
+# Build both by default
+all: $(GPU_TARGET) $(CPU_TARGET)
+
+$(GPU_TARGET): $(GPU_SRC)
+	$(NVCC) $(NVCC_FLAGS) $< -o $@
+
+$(CPU_TARGET): $(CPU_SRC)
+	$(CXX) $(CXX_FLAGS) $< -o $@
+
+# Run both back-to-back for easy comparison
+run: run_gpu run_cpu
+
+run_gpu: $(GPU_TARGET)
+	./$(GPU_TARGET) transactions_data.csv sorted_transactions_gpu.csv
+
+run_cpu: $(CPU_TARGET)
+	./$(CPU_TARGET) transactions_data.csv sorted_transactions_cpu.csv
+
 clean:
-	rm -f $(TARGET)
+	rm -f $(GPU_TARGET) $(CPU_TARGET)
