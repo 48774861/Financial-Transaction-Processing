@@ -1,0 +1,47 @@
+Compiling...
+rm -f transaction_sort_pipeline transaction_sort_pipeline_cpu
+nvcc -O3 -std=c++17 transaction_sort_pipeline.cu -o transaction_sort_pipeline
+g++ -O3 -std=c++17 transaction_sort_pipeline_cpu.cpp -o transaction_sort_pipeline_cpu
+
+Running GPU Transaction Sort Pipeline
+ 
+
+Running CPU Transaction Sort Pipeline
+ 
+Sorted batch 0  (1000000 rows)  in 14.81 ms
+Sorted batch 1  (1000000 rows)  in 14.87 ms
+Sorted batch 2  (1000000 rows)  in 14.75 ms
+Sorted batch 3  (1000000 rows)  in 14.49 ms
+Sorted batch 4  (1000000 rows)  in 14.88 ms
+Sorted batch 5  (1000000 rows)  in 14.46 ms
+Sorted batch 6  (1000000 rows)  in 14.43 ms
+Sorted batch 7  (1000000 rows)  in 14.39 ms
+Sorted batch 8  (1000000 rows)  in 14.46 ms
+Sorted batch 9  (1000000 rows)  in 14.39 ms
+Sorted batch 10  (1000000 rows)  in 14.50 ms
+Sorted batch 11  (1000000 rows)  in 14.64 ms
+Sorted batch 12  (1000000 rows)  in 14.38 ms
+Sorted batch 13  (305915 rows)  in 4.36 ms
+Merged batch 1  (running total: 2000000 rows)  in 9.18 ms
+Merged batch 2  (running total: 3000000 rows)  in 10.86 ms
+Merged batch 3  (running total: 4000000 rows)  in 14.56 ms
+Merged batch 4  (running total: 5000000 rows)  in 20.19 ms
+Merged batch 5  (running total: 6000000 rows)  in 25.66 ms
+Merged batch 6  (running total: 7000000 rows)  in 25.47 ms
+Merged batch 7  (running total: 8000000 rows)  in 29.70 ms
+Merged batch 8  (running total: 9000000 rows)  in 39.03 ms
+Merged batch 9  (running total: 10000000 rows)  in 37.87 ms
+Merged batch 10  (running total: 11000000 rows)  in 48.84 ms
+Merged batch 11  (running total: 12000000 rows)  in 45.25 ms
+Merged batch 12  (running total: 13000000 rows)  in 56.85 ms
+Merged batch 13  (running total: 13305915 rows)  in 50.78 ms
+
+========================================
+  CPU Pipeline Timing Summary
+========================================
+  Batch sort (total) : 193.79 ms
+  Merge (total)      : 414.24 ms
+  Total wall time    : 17961.50 ms
+  Rows written       : 13305915
+  Output file        : sorted_transactions_cpu.csv
+========================================

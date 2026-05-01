@@ -1,0 +1,2 @@
+nvcc warning : Support for offline compilation for architectures prior to '<compute/sm/lto>_75' will be removed in a future release (Use -Wno-deprecated-gpu-targets to suppress warning).
+/cm/local/apps/slurm/var/spool/job411855/slurm_script: line 28: 3462657 Bus error               (core dumped) ./transaction_sort_pipeline transactions_data.csv sorted_transactions_gpu.csv

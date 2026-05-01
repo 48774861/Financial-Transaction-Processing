@@ -1,0 +1,84 @@
+Compiling...
+rm -f transaction_sort_pipeline transaction_sort_pipeline_cpu
+nvcc -O3 -std=c++17 transaction_sort_pipeline.cu -o transaction_sort_pipeline
+
+Running GPU Transaction Sort Pipeline
+ 
+Radix-sorted batch 0  (1000000 rows)  |  transfer: 1.80 ms  |  sort: 0.53 ms
+Radix-sorted batch 1  (1000000 rows)  |  transfer: 1.13 ms  |  sort: 0.53 ms
+Radix-sorted batch 2  (1000000 rows)  |  transfer: 1.11 ms  |  sort: 0.52 ms
+Radix-sorted batch 3  (1000000 rows)  |  transfer: 1.14 ms  |  sort: 0.54 ms
+Radix-sorted batch 4  (1000000 rows)  |  transfer: 1.11 ms  |  sort: 0.53 ms
+Radix-sorted batch 5  (1000000 rows)  |  transfer: 1.28 ms  |  sort: 0.43 ms
+Radix-sorted batch 6  (1000000 rows)  |  transfer: 1.34 ms  |  sort: 0.54 ms
+Radix-sorted batch 7  (1000000 rows)  |  transfer: 1.27 ms  |  sort: 0.53 ms
+Radix-sorted batch 8  (1000000 rows)  |  transfer: 1.11 ms  |  sort: 0.52 ms
+Radix-sorted batch 9  (1000000 rows)  |  transfer: 1.14 ms  |  sort: 0.53 ms
+Radix-sorted batch 10  (1000000 rows)  |  transfer: 1.13 ms  |  sort: 0.53 ms
+Radix-sorted batch 11  (1000000 rows)  |  transfer: 1.19 ms  |  sort: 0.52 ms
+Radix-sorted batch 12  (1000000 rows)  |  transfer: 1.12 ms  |  sort: 0.44 ms
+Radix-sorted batch 13  (305915 rows)  |  transfer: 0.37 ms  |  sort: 0.24 ms
+Merged batch 1  (running total: 2000000 rows)  |  merge: 0.33 ms
+Merged batch 2  (running total: 3000000 rows)  |  merge: 0.34 ms
+Merged batch 3  (running total: 4000000 rows)  |  merge: 0.45 ms
+Merged batch 4  (running total: 5000000 rows)  |  merge: 0.56 ms
+Merged batch 5  (running total: 6000000 rows)  |  merge: 0.67 ms
+Merged batch 6  (running total: 7000000 rows)  |  merge: 0.78 ms
+Merged batch 7  (running total: 8000000 rows)  |  merge: 0.89 ms
+Merged batch 8  (running total: 9000000 rows)  |  merge: 1.00 ms
+Merged batch 9  (running total: 10000000 rows)  |  merge: 1.11 ms
+Merged batch 10  (running total: 11000000 rows)  |  merge: 1.22 ms
+Merged batch 11  (running total: 12000000 rows)  |  merge: 1.33 ms
+Merged batch 12  (running total: 13000000 rows)  |  merge: 1.44 ms
+Merged batch 13  (running total: 13305915 rows)  |  merge: 1.35 ms
+
+========================================
+  GPU Pipeline Timing Summary
+========================================
+  Transfer overhead  : 21.73 ms  (CPU->GPU uploads + GPU->CPU download)
+  Batch sort (total) : 6.95 ms  (pure radix sort kernel time)
+  Merge (total)      : 11.48 ms  (pure merge kernel time)
+  Total wall time    : 20573.33 ms
+  Rows written       : 13305915
+  Output file        : sorted_transactions_gpu.csv
+========================================
+
+Running CPU Transaction Sort Pipeline
+ 
+Sorted batch 0  (1000000 rows)  in 14.97 ms
+Sorted batch 1  (1000000 rows)  in 14.49 ms
+Sorted batch 2  (1000000 rows)  in 14.49 ms
+Sorted batch 3  (1000000 rows)  in 14.61 ms
+Sorted batch 4  (1000000 rows)  in 14.61 ms
+Sorted batch 5  (1000000 rows)  in 14.86 ms
+Sorted batch 6  (1000000 rows)  in 14.56 ms
+Sorted batch 7  (1000000 rows)  in 14.35 ms
+Sorted batch 8  (1000000 rows)  in 14.41 ms
+Sorted batch 9  (1000000 rows)  in 14.48 ms
+Sorted batch 10  (1000000 rows)  in 14.45 ms
+Sorted batch 11  (1000000 rows)  in 14.32 ms
+Sorted batch 12  (1000000 rows)  in 14.70 ms
+Sorted batch 13  (305915 rows)  in 4.32 ms
+Merged batch 1  (running total: 2000000 rows)  in 8.47 ms
+Merged batch 2  (running total: 3000000 rows)  in 10.31 ms
+Merged batch 3  (running total: 4000000 rows)  in 14.35 ms
+Merged batch 4  (running total: 5000000 rows)  in 19.95 ms
+Merged batch 5  (running total: 6000000 rows)  in 25.85 ms
+Merged batch 6  (running total: 7000000 rows)  in 25.20 ms
+Merged batch 7  (running total: 8000000 rows)  in 28.68 ms
+Merged batch 8  (running total: 9000000 rows)  in 38.04 ms
+Merged batch 9  (running total: 10000000 rows)  in 37.88 ms
+Merged batch 10  (running total: 11000000 rows)  in 46.39 ms
+Merged batch 11  (running total: 12000000 rows)  in 44.69 ms
+Merged batch 12  (running total: 13000000 rows)  in 54.81 ms
+Merged batch 13  (running total: 13305915 rows)  in 63.85 ms
+
+========================================
+  CPU Pipeline Timing Summary
+========================================
+  Batch sort (total) : 193.62 ms
+  Merge (total)      : 418.47 ms
+  Total wall time    : 17810.94 ms
+  Rows written       : 13305915
+  Output file        : sorted_transactions_cpu.csv
+========================================
