@@ -1,4 +1,4 @@
-# Real-Time Financial Transaction Data Processing for Fraud Detection Systems
+# Financial Transaction Processing
 Andrew Keuhn, Spencer Neill, Marc Pham  
 ## Abstract
 Modern financial systems process massive volumes of transaction data in real time.  Fast fraud detection is essential, but many systems are limited by a critical bottleneck at the data preprocessing stage before analysis can begin. In this work, we present a GPU-accelerated preprocessing pipeline using CUDA that continuously partitions large-scale transaction data into batches, efficiently sorts each batch using a parallel radix sort, and organizes all transactions by user ID and timestamp using a parallel merge. Leveraging the data-parallel nature of these operations significantly improves our system’s execution time compared to CPU-based solutions like Apache Spark, achieving a speedup of 15.54. Individually, the parallel radix sort and parallel merge have speedups of 28.06 and 35.22 respectively. This work highlights the importance of optimizing preprocessing as a key step in building scalable, real-time financial analytics systems.
